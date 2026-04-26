@@ -6,4 +6,4 @@ Toggle channels with hotkeys in the image viewer just like in Nuke.
 - **B** - blue channel  
 - **A** - alpha channel 
 
-Pushing the hotkey switches to RGBA
+Pushing the hotkey again switches to RGBA
