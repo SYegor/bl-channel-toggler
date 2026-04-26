@@ -19,7 +19,7 @@
 bl_info = {
     "name": "Viewer Channel Toggler",
     "author": "Yegor Smirnov",
-    "version": (1, 0),
+    "version": (1, 0, 1),
     "blender": (5, 1, 1),
     "location": "Image Editor",
     "description": "Toggle viewer channels with R/G/B/A hotkeys",
@@ -46,7 +46,7 @@ def toggle_display_channel(context, target_channel):
     return {'FINISHED'}
 
 
-class IMAGE_OT_toggle_red_channel(bpy.types.Operator):
+class ToggleRedChannel(bpy.types.Operator):
     bl_idname = "image.toggle_red_channel"
     bl_label = "Toggle Red Channel"
 
@@ -54,7 +54,7 @@ class IMAGE_OT_toggle_red_channel(bpy.types.Operator):
         return toggle_display_channel(context, 'RED')
 
 
-class IMAGE_OT_toggle_green_channel(bpy.types.Operator):
+class ToggleGreenChannel(bpy.types.Operator):
     bl_idname = "image.toggle_green_channel"
     bl_label = "Toggle Green Channel"
 
@@ -62,7 +62,7 @@ class IMAGE_OT_toggle_green_channel(bpy.types.Operator):
         return toggle_display_channel(context, 'GREEN')
 
 
-class IMAGE_OT_toggle_blue_channel(bpy.types.Operator):
+class ToggleBlueChannel(bpy.types.Operator):
     bl_idname = "image.toggle_blue_channel"
     bl_label = "Toggle Blue Channel"
 
@@ -70,7 +70,7 @@ class IMAGE_OT_toggle_blue_channel(bpy.types.Operator):
         return toggle_display_channel(context, 'BLUE')
 
 
-class IMAGE_OT_toggle_alpha_channel(bpy.types.Operator):
+class ToggleAlphaChannel(bpy.types.Operator):
     bl_idname = "image.toggle_alpha_channel"
     bl_label = "Toggle Alpha Channel"
 
@@ -78,11 +78,20 @@ class IMAGE_OT_toggle_alpha_channel(bpy.types.Operator):
         return toggle_display_channel(context, 'ALPHA')
 
 
+class ToggleColorChannel(bpy.types.Operator):
+    bl_idname = "image.toggle_color_channel"
+    bl_label = "Toggle Color Channel"
+
+    def execute(self, context):
+        return toggle_display_channel(context, 'COLOR')
+
+
 classes = (
-    IMAGE_OT_toggle_red_channel,
-    IMAGE_OT_toggle_green_channel,
-    IMAGE_OT_toggle_blue_channel,
-    IMAGE_OT_toggle_alpha_channel,
+    ToggleRedChannel,
+    ToggleGreenChannel,
+    ToggleBlueChannel,
+    ToggleAlphaChannel,
+    ToggleColorChannel,
 )
 
 
@@ -100,6 +109,7 @@ def register():
         addon_keymaps.append((km, km.keymap_items.new("image.toggle_green_channel", 'G', 'PRESS')))
         addon_keymaps.append((km, km.keymap_items.new("image.toggle_blue_channel", 'B', 'PRESS')))
         addon_keymaps.append((km, km.keymap_items.new("image.toggle_alpha_channel", 'A', 'PRESS')))
+        addon_keymaps.append((km, km.keymap_items.new("image.toggle_color_channel", 'A', 'PRESS', shift=True)))
 
 
 def unregister():
